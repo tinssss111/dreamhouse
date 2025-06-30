@@ -6,7 +6,6 @@ import { HowToBuy } from "@/components/HowToBuy";
 import { Community } from "@/components/Community";
 import { Footer } from "@/components/Footer";
 import { Tokenomics } from "@/components/Tokenomics";
-import About from "@/components/About";
 
 export default function Home() {
   return (
@@ -16,10 +15,9 @@ export default function Home() {
       </div>
       <div className="min-h-screen">
         <MainSection />
-        <About />
+        <Tokenomics />
         <SectionContent />
         <UrlSection />
-        <Tokenomics />
         <HowToBuy />
         <Community />
         <Footer />

@@ -6,6 +6,7 @@ const MainSection = () => {
   const contractAddress = "GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump";
   const [copied, setCopied] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -76,15 +77,7 @@ const MainSection = () => {
             >
               <div className="flex flex-col sm:flex-row items-center justify-center bg-white p-3 sm:p-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] sm:text-[18px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:shadow-lg max-w-full">
                 <span className="text-sm sm:text-lg md:text-xl hover:text-orange-500 transition-colors duration-300 break-all text-center mb-3 sm:mb-0 sm:mr-3">
-                  {isMobile
-                    ? `${contractAddress.slice(
-                        0,
-                        12
-                      )}...${contractAddress.slice(-4)}`
-                    : `${contractAddress.slice(
-                        0,
-                        20
-                      )}...${contractAddress.slice(-4)}`}
+                  {contractAddress}
                 </span>
 
                 <button
@@ -105,7 +98,7 @@ const MainSection = () => {
         {/* Desktop Layout (side by side) */}
         <div className="hidden lg:flex justify-between items-center">
           <div
-            className={`w-[40%] text-3xl uppercase patrick-hand-regular space-y-8 transition-all duration-1000 ${
+            className={`w-[50%] text-3xl uppercase patrick-hand-regular space-y-8 transition-all duration-1000 ${
               isVisible
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 -translate-x-10"
@@ -131,15 +124,14 @@ const MainSection = () => {
                   : "opacity-0 translate-y-5"
               }`}
             >
-              <div className="flex mr-5 justify-center w-[450px] xl:w-[500px] items-center bg-white p-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] xl:text-[20px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:shadow-lg">
-                <span className="text-xl xl:text-2xl hover:text-orange-500 transition-colors duration-300">
-                  {contractAddress.slice(0, 20)}...
-                  {contractAddress.slice(-4)}
+              <div className="flex mr-5 justify-center w-[550px] xl:w-[610px] items-center bg-white p-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] xl:text-[20px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:shadow-lg">
+                <span className="text-md xl:text-xl hover:text-orange-500 transition-colors duration-300">
+                  {contractAddress}
                 </span>
 
                 <button
                   onClick={copyToClipboard}
-                  className={`rounded-md py-2 px-4 text-xl xl:text-2xl ml-5 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 ${
+                  className={`rounded-md py-2 px-4 text-xl xl:text-2xl ml-1 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 ${
                     copied
                       ? "bg-amber-300 hover:bg-amber-400 text-white"
                       : "bg-amber-500 hover:bg-amber-600"
@@ -151,7 +143,7 @@ const MainSection = () => {
             </div>
           </div>
           <div
-            className={`w-[55%] transition-all duration-1000 delay-200 ${
+            className={`w-[50%] transition-all duration-1000 delay-200 text-center ml-14 ${
               isVisible
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-10"
@@ -160,7 +152,7 @@ const MainSection = () => {
             <img
               src="./images/mainsection.png"
               alt="Dreamhouse"
-              className="h-[700px] xl:h-[900px] hover:scale-105 transition-transform duration-700 ease-in-out float-animation"
+              className="h-[600px] xl:h-[700px] xl:w-[800px] hover:scale-105 transition-transform duration-700 ease-in-out float-animation"
             />
           </div>
         </div>

@@ -3,63 +3,38 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-interface Platform {
-  id: number;
-  name: string;
-  logo: React.ReactNode;
-  link: string;
-}
-
 export const HowToBuy = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [copiedCA, setCopiedCA] = useState(false);
+
+  const contractAddress = "GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1 }
     );
 
     const howToBuyElement = document.getElementById("how-to-buy");
-    if (howToBuyElement) {
-      observer.observe(howToBuyElement);
-    }
+    if (howToBuyElement) observer.observe(howToBuyElement);
 
     return () => {
-      if (howToBuyElement) {
-        observer.unobserve(howToBuyElement);
-      }
+      if (howToBuyElement) observer.unobserve(howToBuyElement);
     };
   }, []);
 
-  const platforms: Platform[] = [
-    {
-      id: 1,
-      name: "Buy on Jupiter",
-      logo: "/logo/jupiter.svg",
-      link: "https://jup.ag/swap/So11111111111111111111111111111111111111112-GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump",
-    },
-    {
-      id: 2,
-      name: "Buy on PreRich",
-      logo: "/logo/prerich.png",
-      link: "https://app.prerich.com/solana/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump",
-    },
-    {
-      id: 3,
-      name: "Buy on Pump.fun",
-      logo: "/logo/pump.png",
-      link: "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true",
-    },
-  ];
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(contractAddress);
+    setCopiedCA(true);
+    setTimeout(() => setCopiedCA(false), 2000);
+  };
 
   return (
     <div
       id="how-to-buy"
-      className="bg-[#FAF1E8] py-12 sm:py-16 lg:py-20 scroll-mt-20"
+      className="bg-[#F5E6D3] py-10 sm:py-16 lg:py-20 scroll-mt-20"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
@@ -68,114 +43,140 @@ export const HowToBuy = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-wider text-black hover:text-orange-500 transition-colors duration-500 cursor-default">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-wider text-black hover:text-orange-500 transition-colors duration-500 cursor-default">
             HOW TO BUY
           </h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mt-4">
-            Choose your preferred platform
-          </p>
         </div>
 
-        {/* Platform Cards - Mobile Layout */}
-        <div className="block lg:hidden space-y-6">
-          {platforms.map((platform, index) => (
-            <Link
-              key={platform.id}
-              href={platform.link}
-              target="_blank"
-              className={`block bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-500 hover:scale-105  ${
-                isVisible
-                  ? "opacity-100 translate-x-0"
-                  : "opacity-0 translate-x-10"
-              }`}
-              style={{
-                transitionDelay: `${index * 200 + 300}ms`,
-              }}
-            >
-              <div className="flex items-center space-x-4 sm:space-x-6">
-                <div className="flex-shrink-0">
-                  <img
-                    src={platform.logo as string}
-                    alt={platform.name}
-                    className="w-16 h-16 sm:w-20 sm:h-20 object-contain hover:scale-110 hover:rotate-12 transition-all duration-500 ease-in-out"
-                  />
+        {/* Main Content */}
+        <div className="max-w-4xl mx-auto">
+          {/* Contract Address Box */}
+          <div
+            className={`mb-8 sm:mb-12 transition-all duration-1000 delay-300 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}
+          >
+            <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 hover:shadow-xl group relative overflow-hidden transition-all duration-300 hover:scale-105">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-100/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -translate-x-full group-hover:translate-x-full wave-animation"></div>
+
+              <label className="block text-xs sm:text-sm text-gray-700 mb-3 relative z-10">
+                Contract Address
+              </label>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-3 relative z-10">
+                <div className="flex-1 text-sm sm:text-lg md:text-xl lg:text-2xl break-all">
+                  {contractAddress}
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 hover:text-orange-600 transition-colors duration-300">
-                    {platform.name}
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-500 mt-1">
-                    Tap to trade $DREAMHOUSE
-                  </p>
-                </div>
-                <div className="flex-shrink-0">
-                  <svg
-                    className="w-6 h-6 text-gray-400 hover:text-orange-500 transition-colors duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                <button
+                  onClick={copyToClipboard}
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl text-xs sm:text-sm shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 relative overflow-hidden group"
+                >
+                  <span className="relative z-10">
+                    {copiedCA ? (
+                      <span className="flex items-center">Copied!</span>
+                    ) : (
+                      <span className="flex text-xl items-center"> Copy</span>
+                    )}
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Steps */}
+          <div
+            className={`space-y-4 sm:space-y-6 transition-all duration-1000 delay-500 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}
+          >
+            {[1, 2, 3].map((step) => (
+              <div
+                key={step}
+                className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] group relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-100/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -translate-x-full group-hover:translate-x-full wave-animation"></div>
+                <div className="flex items-start space-x-4 relative z-10">
+                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    {step}
+                  </div>
+                  <div className="flex-1 text-sm sm:text-base text-gray-800">
+                    {step === 1 && (
+                      <>
+                        <h3 className="font-medium mb-1">
+                          Step 1: Go to{" "}
+                          <Link
+                            href="https://pump.fun/"
+                            target="_blank"
+                            className="text-orange-500 hover:text-orange-600 underline decoration-2 underline-offset-2"
+                          >
+                            https://pump.fun/
+                          </Link>
+                        </h3>
+                        <p className="text-gray-600 text-xs sm:text-sm">
+                          Visit the Pump.fun platform to start trading
+                        </p>
+                      </>
+                    )}
+                    {step === 2 && (
+                      <>
+                        <h3 className="font-medium mb-1">
+                          Step 2: Search Contract Address{" "}
+                          <span className="text-[10px] sm:text-xs text-orange-600 bg-orange-50 px-2 py-1 rounded border border-orange-200">
+                            {contractAddress}
+                          </span>
+                        </h3>
+                        <p className="text-gray-600 text-xs sm:text-sm">
+                          Search for the contract address or paste it directly
+                          into the search box
+                        </p>
+                      </>
+                    )}
+                    {step === 3 && (
+                      <>
+                        <h3 className="font-medium mb-1">
+                          Step 3: Click Buy button
+                        </h3>
+                        <p className="text-gray-600 text-xs sm:text-sm">
+                          Enter the amount you want to buy and click the buy
+                          button to complete your purchase
+                        </p>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Platform Cards - Desktop Layout */}
-        <div className="hidden lg:flex items-center justify-center gap-6 xl:gap-8">
-          {platforms.map((platform, index) => (
-            <Link
-              key={platform.id}
-              href={platform.link}
-              target="_blank"
-              className={`bg-white rounded-3xl p-8 xl:p-10 shadow-lg border border-gray-200 hover:shadow-2xl transition-all duration-500 hover:scale-110  group ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
-              }`}
-              style={{
-                transitionDelay: `${index * 200 + 300}ms`,
-              }}
-            >
-              <div className="flex flex-col items-center text-center space-y-6">
-                <div className="relative">
-                  <img
-                    src={platform.logo as string}
-                    alt={platform.name}
-                    className="w-24 h-24 xl:w-32 xl:h-32 object-contain hover:scale-125 hover:rotate-12 transition-all duration-700 ease-in-out"
-                  />
-                </div>
-
-                <h3 className="text-2xl xl:text-3xl font-semibold text-gray-800 group-hover:text-orange-600 transition-colors duration-300">
-                  {platform.name}
-                </h3>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Bottom Note */}
-        <div
-          className={`text-center mt-8 sm:mt-12 lg:mt-16 transition-all duration-1000 delay-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 hover:text-gray-800 transition-colors duration-300">
-            Safe, secure, and simple ways to buy{" "}
-            <span className="font-bold text-orange-600 hover:text-orange-700 transition-colors duration-300">
-              $DREAMHOUSE
-            </span>{" "}
-            tokens
-          </p>
+            ))}
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%) skewX(-12deg);
+          }
+          100% {
+            transform: translateX(100%) skewX(-12deg);
+          }
+        }
+
+        @keyframes wave {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+
+        .wave-animation {
+          animation: wave 0.7s ease-out;
+        }
+      `}</style>
     </div>
   );
 };

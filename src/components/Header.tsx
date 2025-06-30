@@ -67,12 +67,6 @@ const Header = () => {
               Home
             </button>
             <button
-              onClick={() => scrollToSection("about")}
-              className="py-1 px-3 lg:py-1 lg:px-4 bg-white border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] lg:text-[18px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-lg active:scale-95"
-            >
-              About
-            </button>
-            <button
               onClick={() => scrollToSection("tokenomics")}
               className="py-1 px-3 lg:py-1 lg:px-4 bg-white border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] lg:text-[18px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-lg active:scale-95"
             >
@@ -89,10 +83,10 @@ const Header = () => {
             <a
               href={linkBuyToken}
               target="_blank"
-              className="flex justify-center uppercase items-center bg-orange-500 py-1 px-2 lg:py-1 lg:px-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[14px] lg:text-[16px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-lg hover:bg-orange-600 active:scale-95"
+              className="flex justify-center text-white uppercase items-center bg-orange-500 py-1 px-2 lg:py-1 lg:px-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[14px] lg:text-[16px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-lg hover:bg-orange-600 active:scale-95"
             >
-              <span className="hidden xl:inline">Buy $Dreamhouse</span>
-              <span className="xl:hidden">Buy Token</span>
+              <span className="hidden xl:inline">Buy $Dreamhouse 🔥</span>
+              <span className="xl:hidden">Buy Token 🔥</span>
             </a>
             <a
               href={linkInstagram}
@@ -140,7 +134,7 @@ const Header = () => {
               target="_blank"
               className="bg-orange-500 py-2 px-3 border-[2px] border-b-[3px] border-[var(--black)] rounded-[6px] text-[14px] font-semibold text-white transition-all duration-300 ease-in-out hover:bg-orange-600 active:scale-95"
             >
-              Buy
+              Buy 🔥
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

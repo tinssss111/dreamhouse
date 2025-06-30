@@ -39,15 +39,16 @@ export const Community = () => {
   ];
 
   return (
-    <div className="bg-[#F5E6D3] py-20">
+    <div className="bg-[#FAF1E8] py-20">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="text-center mb-16">
           <h2 className="text-6xl font-bold mb-6 uppercase tracking-wider">
             Community
           </h2>
-          <p className="text-2xl w-[500px] mx-auto">
-            Follow us on Twitter & Telegram. Be part of the $DREAMHOUSE fam!
+          <p className="text-2xl mx-auto flex flex-col items-center gap-4">
+            Follow us on Twitter, Instagram, SoundCloud, and TikTok.
+            <span className="">Be part of the $DREAMHOUSE fam!</span>
           </p>
         </div>
 
