@@ -15,10 +15,10 @@ export default function Home() {
       </div>
       <div className="min-h-screen">
         <MainSection />
-        <Tokenomics />
         <SectionContent />
         <UrlSection />
         <HowToBuy />
+        <Tokenomics />
         <Community />
         <Footer />
       </div>

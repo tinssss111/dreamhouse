@@ -119,12 +119,12 @@ export const UrlSection = () => {
               const resetPosition = imageItems.length * itemWidth;
               scrollRef.current.scrollLeft = resetPosition;
             }
-          }, 850); // nên để cao hơn duration của `behavior: smooth`
+          }, 900); // nên để cao hơn duration của `behavior: smooth`
 
           return nextIndex;
         });
       }
-    }, 3000); // mỗi 3 giây
+    }, 2000); // mỗi 3 giây
   }, [isPaused, imageItems.length, clearAutoScroll]);
 
   // Auto slide function for mobile
@@ -348,7 +348,7 @@ export const UrlSection = () => {
   return (
     <div
       id="url-section"
-      className="bg-[#FAF1E8] py-12 sm:py-16 lg:py-20 relative overflow-hidden scroll-mt-20"
+      className="bg-[#F5E6D3] py-12 sm:py-16 lg:py-20 relative overflow-hidden scroll-mt-20"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-10">
@@ -465,11 +465,11 @@ export const UrlSection = () => {
                 }`}
                 style={{
                   transitionDelay: `${
-                    (index % imageItems.length) * 150 + 300
+                    (index % imageItems.length) * 150 + 200
                   }ms`,
                 }}
               >
-                <div className="relative overflow-hidden group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:rotate-1 bg-white">
+                <div className="relative overflow-hidden group transition-all duration-500 hover:scale-105 hover:rotate-1 bg-white h-96">
                   {!imagesLoaded.has(`${item.id}-${index}`) && (
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse rounded-2xl flex items-center justify-center z-10">
                       <div className="text-gray-400">Loading...</div>
@@ -480,7 +480,7 @@ export const UrlSection = () => {
                     alt={item.alt}
                     width={320}
                     height={384}
-                    className="w-full h-auto object-cover rounded-2xl"
+                    className="w-full h-auto object-cover"
                     onLoad={() => handleImageLoad(`${item.id}-${index}`)}
                     priority={index < 6}
                   />

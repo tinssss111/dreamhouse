@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React from "react";
-import { FaXTwitter, FaSoundcloud, FaTiktok } from "react-icons/fa6";
+import { FaXTwitter, FaTiktok } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 
 interface SocialLink {
@@ -25,10 +26,16 @@ export const Community = () => {
       logo: <RiInstagramFill />,
     },
     {
-      name: "SoundCloud",
-      icon: "SoundCloud",
-      url: "https://soundcloud.com/chillhousesol",
-      logo: <FaSoundcloud />,
+      name: "Pump.fun",
+      icon: "Pump.fun",
+      url: "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true",
+      logo: (
+        <img
+          src="/logo/pump.png"
+          alt="Pump.fun"
+          className="w-[20px] h-[20px]"
+        />
+      ),
     },
     {
       name: "Tiktok",
@@ -47,7 +54,7 @@ export const Community = () => {
             Community
           </h2>
           <p className="text-2xl mx-auto flex flex-col items-center gap-4">
-            Follow us on Twitter, Instagram, SoundCloud, and TikTok.
+            Follow us on Twitter, Instagram, Pump.fun, and TikTok.
             <span className="">Be part of the $DREAMHOUSE fam!</span>
           </p>
         </div>

@@ -34,7 +34,7 @@ export const SectionContent = () => {
   const content2 = "Life without trending audio, stay away from the city";
 
   return (
-    <div id="section-content" className="bg-[#F5E6D3] scroll-mt-20">
+    <div id="section-content" className="bg-[#FAF1E8] scroll-mt-20">
       {/* Mobile Layout */}
       <div className="lg:hidden py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6">

@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useState } from "react";
-import { RiInstagramFill } from "react-icons/ri";
 import { FaXTwitter } from "react-icons/fa6";
 import { HiMenu, HiX } from "react-icons/hi";
 
@@ -23,7 +23,8 @@ const Header = () => {
 
   const linkBuyToken =
     "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true";
-  const linkInstagram = "https://www.instagram.com/chillhousesol";
+  const linkPump =
+    "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true";
   const linkTwitter = "https://x.com/ChillHouseSOL";
 
   const scrollToSection = (sectionId: string) => {
@@ -67,16 +68,22 @@ const Header = () => {
               Home
             </button>
             <button
-              onClick={() => scrollToSection("tokenomics")}
+              onClick={() => scrollToSection("section-content")}
               className="py-1 px-3 lg:py-1 lg:px-4 bg-white border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] lg:text-[18px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-lg active:scale-95"
             >
-              Tokenomics
+              About
             </button>
             <button
               onClick={() => scrollToSection("how-to-buy")}
               className="py-1 px-3 lg:py-1 lg:px-4 bg-white border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] lg:text-[18px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-lg active:scale-95"
             >
               How to Buy
+            </button>
+            <button
+              onClick={() => scrollToSection("tokenomics")}
+              className="py-1 px-3 lg:py-1 lg:px-4 bg-white border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] lg:text-[18px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-lg active:scale-95"
+            >
+              Tokenomics
             </button>
           </div>
           <div className="flex items-center gap-2 lg:gap-4">
@@ -89,12 +96,16 @@ const Header = () => {
               <span className="xl:hidden">Buy Token 🔥</span>
             </a>
             <a
-              href={linkInstagram}
+              href={linkPump}
               target="_blank"
               className="flex justify-center bg-white items-center w-[35px] h-[35px] lg:w-[40px] lg:h-[40px] border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] lg:text-[20px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-110 hover:shadow-lg hover:text-pink-600 active:scale-95"
               aria-label="Instagram"
             >
-              <RiInstagramFill />
+              <img
+                src="/logo/pump.png"
+                alt="Pump.fun"
+                className="w-[20px] h-[20px]"
+              />
             </a>
             <a
               href={linkTwitter}
@@ -111,12 +122,16 @@ const Header = () => {
         <div className="lg:hidden flex justify-between items-center">
           <div className="flex items-center gap-3">
             <a
-              href={linkInstagram}
+              href={linkPump}
               target="_blank"
               className="flex justify-center bg-white items-center w-[35px] h-[35px] border-[2px] border-b-[3px] border-[var(--black)] rounded-[6px] text-[16px] transition-all duration-300 ease-in-out hover:scale-110 hover:text-pink-600"
               aria-label="Instagram"
             >
-              <RiInstagramFill />
+              <img
+                src="/logo/pump.png"
+                alt="Pump.fun"
+                className="w-[20px] h-[20px]"
+              />
             </a>
             <a
               href={linkTwitter}
@@ -147,7 +162,7 @@ const Header = () => {
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-lg z-50">
+          <div className="lg:hidden absolute top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-lg z-50">
             <div className="container mx-auto px-4 py-4 space-y-3">
               <button
                 onClick={scrollToTop}
@@ -156,7 +171,7 @@ const Header = () => {
                 Home
               </button>
               <button
-                onClick={() => scrollToSection("about")}
+                onClick={() => scrollToSection("section-content")}
                 className="w-full py-3 px-4 bg-white border-[2px] border-b-[3px] border-[var(--black)] rounded-[6px] text-[18px] font-semibold transition-all duration-300 ease-in-out hover:scale-105 active:scale-95"
               >
                 About

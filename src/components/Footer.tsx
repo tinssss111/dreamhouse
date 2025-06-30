@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React from "react";
 import { FaXTwitter } from "react-icons/fa6";
-import { RiInstagramFill } from "react-icons/ri";
 
 export const Footer = () => {
-  const linkInstagram = "https://www.instagram.com/chillhousesol";
+  const linkPump =
+    "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true";
   const linkTwitter = "https://x.com/ChillHouseSOL";
 
   return (
@@ -36,12 +37,16 @@ export const Footer = () => {
             <h3 className="text-lg font-medium">Follow Us</h3>
             <div className="flex gap-4 justify-start md:justify-end">
               <a
-                href={linkInstagram}
+                href={linkPump}
                 target="_blank"
                 className="flex justify-center items-center w-10 h-10 bg-white border-2 border-b-4 border-black rounded-lg text-xl transition hover:border-t-4 hover:border-b-2"
                 aria-label="Telegram"
               >
-                <RiInstagramFill />
+                <img
+                  src="/logo/pump.png"
+                  alt="Pump.fun"
+                  className="w-[20px] h-[20px]"
+                />
               </a>
               <a
                 href={linkTwitter}
