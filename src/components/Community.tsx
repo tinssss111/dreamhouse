@@ -50,10 +50,10 @@ export const Community = () => {
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-6xl font-bold mb-6 uppercase tracking-wider">
+          <h2 className="text-4xl sm:text-4xl md:text-4xl lg:text-6xl xl:text-4xl font-bold mb-6 uppercase tracking-wider transition-all duration-300 ease-in-out hover:text-orange-500 cursor-default hover:scale-105">
             Community
           </h2>
-          <p className="text-2xl mx-auto flex flex-col items-center gap-4">
+          <p className="text-2xl sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl mx-auto flex flex-col items-center gap-4 transition-all duration-300 ease-in-out hover:text-orange-500 cursor-default hover:scale-105">
             Follow us on Twitter, Instagram, Pump.fun, and TikTok.
             <span className="">Be part of the $DREAMHOUSE fam!</span>
           </p>

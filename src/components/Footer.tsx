@@ -9,7 +9,7 @@ export const Footer = () => {
   const linkTwitter = "https://x.com/ChillHouseSOL";
 
   return (
-    <footer className="bg-[#F5E6D3]">
+    <footer className="bg-[#A4D8C8]">
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Main Footer Content */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">

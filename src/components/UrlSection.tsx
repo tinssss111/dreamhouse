@@ -17,7 +17,6 @@ export const UrlSection = () => {
   const [imagesLoaded, setImagesLoaded] = useState<Set<string>>(new Set());
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [currentDesktopIndex, setCurrentDesktopIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const autoScrollRef = useRef<NodeJS.Timeout | null>(null);
   const isAutoScrolling = useRef(false);
@@ -80,8 +79,15 @@ export const UrlSection = () => {
     if (autoScrollRef.current) {
       clearInterval(autoScrollRef.current);
       autoScrollRef.current = null;
+      const itemWidth = 320 + 32;
+      const initialPosition = imageItems.length * itemWidth;
+      setTimeout(() => {
+        if (scrollRef.current) {
+          scrollRef.current.scrollLeft = initialPosition;
+        }
+      }, 0);
     }
-  }, []);
+  }, [imageItems.length]);
 
   // Auto scroll function for desktop
   const startAutoScroll = useCallback(() => {
@@ -93,7 +99,7 @@ export const UrlSection = () => {
         const scrollEl = scrollRef.current;
         const itemWidth = 320 + 32; // w-80 = 320px + gap-8 = 32px
 
-        setCurrentDesktopIndex((prevIndex) => {
+        setCurrentSlide((prevIndex: number) => {
           let nextIndex = prevIndex + 1;
           let shouldReset = false;
 
@@ -216,7 +222,7 @@ export const UrlSection = () => {
       };
 
       // Small delay to ensure DOM is ready
-      const timer = setTimeout(startAutoScrolling, 100);
+      const timer = setTimeout(startAutoScrolling, 300);
 
       return () => {
         clearTimeout(timer);
@@ -302,6 +308,23 @@ export const UrlSection = () => {
     clearAutoScroll,
   ]);
 
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      console.log("wheel scroll triggered", e.deltaY);
+      e.preventDefault();
+      scrollEl.scrollLeft += e.deltaY;
+    };
+
+    scrollEl.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      scrollEl.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
+
   // Simple loading skeleton
   const SkeletonLoader = ({ mobile = false }: { mobile?: boolean }) => (
     <div
@@ -317,7 +340,7 @@ export const UrlSection = () => {
     return (
       <div id="url-section" className="bg-[#FAF1E8] py-10 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase text-center mb-8 sm:mb-12">
+          <h1 className="text-4xl sm:text-4xl md:text-4xl lg:text-6xl xl:text-4xl uppercase text-center mb-8 sm:mb-12">
             When the goal isn&apos;t Gucci
           </h1>
           <div className="relative">
@@ -348,7 +371,7 @@ export const UrlSection = () => {
   return (
     <div
       id="url-section"
-      className="bg-[#F5E6D3] py-12 sm:py-16 lg:py-20 relative overflow-hidden scroll-mt-20"
+      className="bg-[#A4D8C8] py-12 sm:py-16 lg:py-20 relative overflow-hidden scroll-mt-20"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-10">
@@ -443,12 +466,7 @@ export const UrlSection = () => {
         <div className="hidden lg:block relative group w-full">
           <div
             ref={scrollRef}
-            className="flex gap-8 overflow-x-auto scrollbar-hide pb-6"
-            style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-              scrollBehavior: "smooth",
-            }}
+            className="scrollbar-hide force-scroll gap-8 pb-6"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -492,11 +510,6 @@ export const UrlSection = () => {
           {/* Gradient overlays for smooth edges */}
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#FAF1E8] to-transparent pointer-events-none z-10"></div>
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#FAF1E8] to-transparent pointer-events-none z-10"></div>
-
-          {/* Current item indicator */}
-          <div className="absolute bottom-[-50px] left-1/2 transform -translate-x-1/2 bg-white bg-opacity-95 px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-            {currentDesktopIndex + 1} / {imageItems.length}
-          </div>
         </div>
 
         {/* Bottom Quote */}
@@ -517,10 +530,23 @@ export const UrlSection = () => {
           </p>
         </div>
       </div>
-
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
+        }
+
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          overflow-x: auto;
+          overflow-y: hidden;
+          white-space: nowrap;
+          touch-action: pan-x;
+        }
+
+        .force-scroll {
+          display: flex;
+          flex-wrap: nowrap;
         }
       `}</style>
     </div>

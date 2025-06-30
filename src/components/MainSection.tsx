@@ -30,7 +30,7 @@ const MainSection = () => {
   };
 
   return (
-    <div className="bg-[#F5E6D3] w-full min-h-screen flex items-center justify-center py-16 sm:py-20 lg:py-0">
+    <div className="bg-[#A4D8C8] w-full min-h-screen flex items-center justify-center py-16 sm:py-20 lg:py-0">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile Layout (stacked) */}
         <div className="lg:hidden flex flex-col items-center text-center space-y-8 sm:space-y-12">
@@ -75,8 +75,8 @@ const MainSection = () => {
                   : "opacity-0 translate-y-5"
               }`}
             >
-              <div className="flex flex-col sm:flex-row items-center justify-center bg-white p-3 sm:p-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] sm:text-[18px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:shadow-lg max-w-full">
-                <span className="text-md sm:text-[16px] md:text-xl hover:text-orange-500 transition-colors duration-300 break-all text-center mb-3 sm:mb-0 sm:mr-3">
+              <div className="flex flex-col sm:flex-row  items-center justify-center bg-white p-3 sm:p-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] sm:text-[18px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:shadow-lg max-w-full">
+                <span className="text-md sm:text-[16px] md:text-[19px] hover:text-orange-500 transition-colors duration-300 break-all text-center mb-3 sm:mb-0 sm:mr-3">
                   <strong className="">CA:</strong>
                   {contractAddress}
                 </span>
@@ -125,8 +125,8 @@ const MainSection = () => {
                   : "opacity-0 translate-y-5"
               }`}
             >
-              <div className="flex mr-5 justify-center w-[540px] xl:w-[650px] items-center bg-white p-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] xl:text-[20px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:shadow-lg">
-                <span className="text-[17px] xl:text-xl hover:text-orange-500 transition-colors duration-300">
+              <div className="flex mr-5 justify-center w-[550px] xl:w-[650px] lg:w-[540px] items-center bg-white p-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] xl:text-[20px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:shadow-lg">
+                <span className="text-[17px] xl:text-xl sm:text-[15px] hover:text-orange-500 transition-colors duration-300">
                   <strong className="mr-1">CA:</strong>
                   {contractAddress}
                 </span>

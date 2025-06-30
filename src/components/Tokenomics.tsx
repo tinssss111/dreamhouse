@@ -48,7 +48,7 @@ export const Tokenomics = () => {
   return (
     <div
       id="tokenomics"
-      className="bg-[#F5E6D3] scroll-mt-20 py-16 sm:py-24 lg:py-32"
+      className="bg-[#A4D8C8] scroll-mt-20 py-16 sm:py-24 lg:py-32"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2

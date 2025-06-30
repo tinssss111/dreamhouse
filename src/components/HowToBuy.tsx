@@ -53,7 +53,7 @@ export const HowToBuy = () => {
           </a>
         </div>
       ),
-      description: "Visit the Pump.fun platform to start trading",
+      description: "Visit the Pump.fun platform to start trading.",
     },
     {
       number: "02",
@@ -65,7 +65,7 @@ export const HowToBuy = () => {
       number: "03",
       title: "CLICK BUY BUTTON",
       description:
-        "Enter the amount you want to buy and click the buy button to complete your purchase",
+        "Enter the amount you want to buy and click the buy button to complete your purchase.",
     },
   ];
 
@@ -81,7 +81,7 @@ export const HowToBuy = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black uppercase tracking-wider text-black hover:text-orange-500 transition-colors duration-500 cursor-default">
+          <h2 className="text-4xl sm:text-4xl md:text-4xl lg:text-6xl xl:text-4xl font-black uppercase tracking-wider text-black hover:text-orange-500 cursor-default transition-all duration-300 ease-in-out hover:scale-105">
             HOW TO BUY
           </h2>
         </div>

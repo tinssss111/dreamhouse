@@ -30,8 +30,8 @@ export const SectionContent = () => {
   const linkBuyToken =
     "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true";
   const content =
-    "Memecoin inspires the community to live a life without luxury and money";
-  const content2 = "Life without trending audio, stay away from the city";
+    "Memecoin inspires the community to live a life without luxury and money.";
+  const content2 = "Life without trending audio, stay away from the city.";
 
   return (
     <div id="section-content" className="bg-[#FAF1E8] scroll-mt-20">
@@ -66,7 +66,7 @@ export const SectionContent = () => {
                   : "opacity-0 translate-y-10"
               }`}
             >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl uppercase font-bold hover:text-orange-500 transition-colors duration-500 cursor-default">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl uppercase font-bold hover:text-orange-500 cursor-default transition-all duration-300 ease-in-out hover:scale-105">
                 What is Dream House coin?
               </h2>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-700 hover:text-gray-900 transition-colors duration-300 leading-relaxed">
@@ -96,39 +96,7 @@ export const SectionContent = () => {
       <div className="hidden lg:block">
         <div className="container mx-auto min-h-screen px-6 xl:px-8 flex justify-between items-center">
           <div
-            className={`w-[60%] xl:w-[60%] space-y-8 xl:space-y-10 transition-all duration-1000 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-10"
-            }`}
-          >
-            <h2 className="text-4xl xl:text-4xl 2xl:text-5xl uppercase font-bold hover:text-orange-500 transition-colors duration-500 cursor-default">
-              What is Dream House coin?
-            </h2>
-            <p className="text-xl xl:text-2xl text-gray-700 hover:text-gray-900 transition-colors duration-300 leading-relaxed w-full max-w-4xl">
-              {content}
-              <br />
-              {content2}
-            </p>
-            <div
-              className={`flex items-center gap-5 transition-all duration-1000 delay-300 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-5"
-              }`}
-            >
-              <a
-                href={linkBuyToken}
-                target="_blank"
-                className="inline-flex items-center justify-center uppercase bg-orange-500 py-4 xl:py-5 px-8 xl:px-10 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] xl:text-[20px] font-semibold transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-xl hover:bg-orange-600 active:scale-95 group"
-              >
-                Buy $Dreamhouse 🔥
-              </a>
-            </div>
-          </div>
-
-          <div
-            className={`w-[40%] xl:w-[35%] transition-all duration-1000 delay-200 ${
+            className={`w-[45%] xl:w-[45%] transition-all duration-1000 delay-200 ${
               isVisible
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-10"
@@ -148,6 +116,37 @@ export const SectionContent = () => {
               <div className="absolute top-1/4 -left-4 w-3 h-3 bg-orange-400 rounded-full opacity-0 group-hover:opacity-70 group-hover:animate-bounce transition-all duration-500 delay-100"></div>
               <div className="absolute top-1/3 -right-6 w-2 h-2 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-70 group-hover:animate-bounce transition-all duration-500 delay-300"></div>
               <div className="absolute bottom-1/3 -left-2 w-4 h-4 bg-pink-400 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-bounce transition-all duration-500 delay-200"></div>
+            </div>
+          </div>
+          <div
+            className={`w-[50%] xl:w-[50%] flex flex-col items-center space-y-8 xl:space-y-10 transition-all duration-1000 text-left ${
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-10"
+            }`}
+          >
+            <h2 className="text-4xl xl:text-4xl text-center 2xl:text-5xl uppercase font-bold hover:text-orange-500 cursor-default transition-all duration-300 ease-in-out hover:scale-105">
+              What is DreamHouse coin?
+            </h2>
+            <p className="text-xl xl:text-2xl text-center text-gray-700 hover:text-gray-900 transition-colors duration-300 leading-relaxed w-full max-w-4xl">
+              {content}
+              <br />
+              {content2}
+            </p>
+            <div
+              className={`flex items-center gap-5 transition-all duration-1000 delay-300 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-5"
+              }`}
+            >
+              <a
+                href={linkBuyToken}
+                target="_blank"
+                className="inline-flex items-center justify-center uppercase bg-orange-500 py-4 xl:py-5 px-8 xl:px-10 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] xl:text-[20px] font-semibold transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-xl hover:bg-orange-600 active:scale-95 group"
+              >
+                Buy $Dreamhouse 🔥
+              </a>
             </div>
           </div>
         </div>
