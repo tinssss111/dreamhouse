@@ -4,11 +4,35 @@ import React, { useEffect, useState } from "react";
 import { FaXTwitter } from "react-icons/fa6";
 import { HiMenu, HiX } from "react-icons/hi";
 
+interface ConfigData {
+  contract_address: string;
+  pump_fun_url: string;
+  x_link: string;
+  instagram_link: string;
+  tiktok_link: string;
+}
+
 const Header = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [config, setConfig] = useState<ConfigData | null>(null);
 
   useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const response = await fetch("/api/config");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: ConfigData = await response.json();
+        setConfig(data);
+      } catch (e: unknown) {
+        console.error("Failed to fetch config: ", e);
+      }
+    };
+
+    fetchConfig();
+
     const updateScrollProgress = () => {
       const currentProgress = window.pageYOffset;
       const scrollHeight = document.body.scrollHeight - window.innerHeight;
@@ -20,12 +44,6 @@ const Header = () => {
     window.addEventListener("scroll", updateScrollProgress);
     return () => window.removeEventListener("scroll", updateScrollProgress);
   }, []);
-
-  const linkBuyToken =
-    "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true";
-  const linkPump =
-    "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true";
-  const linkTwitter = "https://x.com/ChillHouseSOL";
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -88,18 +106,20 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-2 lg:gap-4">
             <a
-              href={linkBuyToken}
+              href={config?.pump_fun_url || "#"}
               target="_blank"
+              rel="noopener noreferrer"
               className="flex justify-center text-white uppercase items-center bg-orange-500 py-1 px-2 lg:py-1 lg:px-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[14px] lg:text-[16px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-lg hover:bg-orange-600 active:scale-95"
             >
               <span className="hidden xl:inline">Buy $Dreamhouse 🔥</span>
               <span className="xl:hidden">Buy Token 🔥</span>
             </a>
             <a
-              href={linkPump}
+              href={config?.pump_fun_url || "#"}
               target="_blank"
+              rel="noopener noreferrer"
               className="flex justify-center bg-white items-center w-[35px] h-[35px] lg:w-[40px] lg:h-[40px] border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] lg:text-[20px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-110 hover:shadow-lg hover:text-pink-600 active:scale-95"
-              aria-label="Instagram"
+              aria-label="Pump.fun"
             >
               <img
                 src="/logo/pump.png"
@@ -108,8 +128,9 @@ const Header = () => {
               />
             </a>
             <a
-              href={linkTwitter}
+              href={config?.x_link || "#"}
               target="_blank"
+              rel="noopener noreferrer"
               className="flex justify-center bg-white items-center w-[35px] h-[35px] lg:w-[40px] lg:h-[40px] border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] lg:text-[20px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-110 hover:shadow-lg hover:text-blue-600 active:scale-95"
               aria-label="Twitter"
             >
@@ -122,10 +143,11 @@ const Header = () => {
         <div className="lg:hidden flex justify-between items-center">
           <div className="flex items-center gap-3">
             <a
-              href={linkPump}
+              href={config?.pump_fun_url || "#"}
               target="_blank"
+              rel="noopener noreferrer"
               className="flex justify-center bg-white items-center w-[35px] h-[35px] border-[2px] border-b-[3px] border-[var(--black)] rounded-[6px] text-[16px] transition-all duration-300 ease-in-out hover:scale-110 hover:text-pink-600"
-              aria-label="Instagram"
+              aria-label="Pump.fun"
             >
               <img
                 src="/logo/pump.png"
@@ -134,8 +156,9 @@ const Header = () => {
               />
             </a>
             <a
-              href={linkTwitter}
+              href={config?.x_link || "#"}
               target="_blank"
+              rel="noopener noreferrer"
               className="flex justify-center bg-white items-center w-[35px] h-[35px] border-[2px] border-b-[3px] border-[var(--black)] rounded-[6px] text-[16px] transition-all duration-300 ease-in-out hover:scale-110 hover:text-blue-600"
               aria-label="Twitter"
             >
@@ -145,8 +168,9 @@ const Header = () => {
 
           <div className="flex items-center gap-3">
             <a
-              href={linkBuyToken}
+              href={config?.pump_fun_url || "#"}
               target="_blank"
+              rel="noopener noreferrer"
               className="bg-orange-500 py-2 px-3 border-[2px] border-b-[3px] border-[var(--black)] rounded-[6px] text-[14px] font-semibold text-white transition-all duration-300 ease-in-out hover:bg-orange-600 active:scale-95"
             >
               Buy 🔥

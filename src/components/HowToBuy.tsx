@@ -1,7 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useState } from "react";
-
+interface ConfigData {
+  contract_address: string;
+  pump_fun_url: string;
+  x_link: string;
+  instagram_link: string;
+  tiktok_link: string;
+}
 interface HowToBuy {
   number: string;
   title: React.ReactNode;
@@ -11,8 +17,23 @@ interface HowToBuy {
 export const HowToBuy = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [copiedCA, setCopiedCA] = useState(false);
+  const [config, setConfig] = useState<ConfigData | null>(null);
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const response = await fetch("/api/config");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: ConfigData = await response.json();
+        setConfig(data);
+      } catch (e: unknown) {
+        console.error("Failed to fetch config: ", e);
+      }
+    };
 
-  const contractAddress = "GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump";
+    fetchConfig();
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,7 +52,7 @@ export const HowToBuy = () => {
   }, []);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(contractAddress);
+    navigator.clipboard.writeText(config?.contract_address || "");
     setCopiedCA(true);
     setTimeout(() => setCopiedCA(false), 2000);
   };
@@ -102,7 +123,7 @@ export const HowToBuy = () => {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-3 relative z-10">
                 <div className="flex-1 text-[19px] sm:text-[16px] md:text-xl lg:text-2xl break-all">
                   <strong className="mr-1">CA:</strong>
-                  {contractAddress}
+                  {config?.contract_address}
                 </div>
                 <button
                   onClick={copyToClipboard}

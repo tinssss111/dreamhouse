@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaXTwitter, FaTiktok } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 
@@ -10,25 +10,49 @@ interface SocialLink {
   url: string;
   logo: React.ReactNode;
 }
-
+interface ConfigData {
+  contract_address: string;
+  pump_fun_url: string;
+  x_link: string;
+  instagram_link: string;
+  tiktok_link: string;
+}
 export const Community = () => {
+  const [config, setConfig] = useState<ConfigData | null>(null);
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const response = await fetch("/api/config");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: ConfigData = await response.json();
+        setConfig(data);
+      } catch (e: unknown) {
+        console.error("Failed to fetch config: ", e);
+      }
+    };
+
+    fetchConfig();
+  }, []);
   const socialLinks: SocialLink[] = [
     {
       name: "Twitter",
       icon: "Twitter",
-      url: "https://x.com/ChillHouseSOL",
+      url: config?.x_link || "#",
       logo: <FaXTwitter />,
     },
     {
       name: "Instagram",
       icon: "Instagram",
-      url: "https://www.instagram.com/chillhousesol",
+      url: config?.instagram_link || "#",
       logo: <RiInstagramFill />,
     },
     {
       name: "Pump.fun",
       icon: "Pump.fun",
-      url: "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true",
+      url: config?.pump_fun_url || "#",
       logo: (
         <img
           src="/logo/pump.png"
@@ -40,7 +64,7 @@ export const Community = () => {
     {
       name: "Tiktok",
       icon: "Tiktok",
-      url: "https://www.tiktok.com/@chillhousesol",
+      url: config?.tiktok_link || "#",
       logo: <FaTiktok />,
     },
   ];

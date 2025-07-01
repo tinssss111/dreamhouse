@@ -2,12 +2,37 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
+interface ConfigData {
+  contract_address: string;
+  pump_fun_url: string;
+  x_link: string;
+  instagram_link: string;
+  tiktok_link: string;
+}
 const MainSection = () => {
-  const contractAddress = "GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump";
   const [copied, setCopied] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMobile, setIsMobile] = useState(false);
+
+  const [config, setConfig] = useState<ConfigData | null>(null);
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const response = await fetch("/api/config");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: ConfigData = await response.json();
+        setConfig(data);
+      } catch (e: unknown) {
+        console.error("Failed to fetch config: ", e);
+      }
+    };
+
+    fetchConfig();
+  }, []);
 
   useEffect(() => {
     setIsVisible(true);
@@ -21,7 +46,7 @@ const MainSection = () => {
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(contractAddress);
+      await navigator.clipboard.writeText(config?.contract_address || "");
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -78,7 +103,7 @@ const MainSection = () => {
               <div className="flex flex-col sm:flex-row  items-center justify-center bg-white p-3 sm:p-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] sm:text-[18px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:shadow-lg max-w-full">
                 <span className="text-md sm:text-[16px] md:text-[19px] hover:text-orange-500 transition-colors duration-300 break-all text-center mb-3 sm:mb-0 sm:mr-3">
                   <strong className="">CA:</strong>
-                  {contractAddress}
+                  {config?.contract_address}
                 </span>
 
                 <button
@@ -128,7 +153,7 @@ const MainSection = () => {
               <div className="flex mr-5 justify-center w-[550px] xl:w-[650px] lg:w-[540px] items-center bg-white p-4 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] xl:text-[20px] transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:shadow-lg">
                 <span className="text-[17px] xl:text-xl sm:text-[15px] hover:text-orange-500 transition-colors duration-300">
                   <strong className="mr-1">CA:</strong>
-                  {contractAddress}
+                  {config?.contract_address}
                 </span>
 
                 <button

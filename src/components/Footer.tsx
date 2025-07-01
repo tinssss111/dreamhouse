@@ -1,12 +1,56 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaXTwitter } from "react-icons/fa6";
+import { FaInstagram, FaTiktok } from "react-icons/fa";
+
+interface ConfigData {
+  contract_address: string;
+  pump_fun_url: string;
+  x_link: string;
+  instagram_link: string;
+  tiktok_link: string;
+}
 
 export const Footer = () => {
-  const linkPump =
-    "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true";
-  const linkTwitter = "https://x.com/ChillHouseSOL";
+  const [config, setConfig] = useState<ConfigData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const response = await fetch("/api/config");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: ConfigData = await response.json();
+        setConfig(data);
+      } catch (e: unknown) {
+        setError((e as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchConfig();
+  }, []);
+
+  if (loading) {
+    return (
+      <footer className="bg-[#A4D8C8] text-center py-8">
+        Loading footer content...
+      </footer>
+    );
+  }
+
+  if (error) {
+    return (
+      <footer className="bg-[#A4D8C8] text-center py-8 text-red-500">
+        Error loading footer: {error}
+      </footer>
+    );
+  }
 
   return (
     <footer className="bg-[#A4D8C8]">
@@ -37,10 +81,11 @@ export const Footer = () => {
             <h3 className="text-lg font-medium">Follow Us</h3>
             <div className="flex gap-4 justify-start md:justify-end">
               <a
-                href={linkPump}
+                href={config?.pump_fun_url || "#"}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex justify-center items-center w-10 h-10 bg-white border-2 border-b-4 border-black rounded-lg text-xl transition hover:border-t-4 hover:border-b-2"
-                aria-label="Telegram"
+                aria-label="Pump.fun"
               >
                 <img
                   src="/logo/pump.png"
@@ -49,12 +94,31 @@ export const Footer = () => {
                 />
               </a>
               <a
-                href={linkTwitter}
+                href={config?.x_link || "#"}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex justify-center items-center w-10 h-10 bg-white border-2 border-b-4 border-black rounded-lg text-xl transition hover:border-t-4 hover:border-b-2"
                 aria-label="Twitter"
               >
                 <FaXTwitter />
+              </a>
+              <a
+                href={config?.instagram_link || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex justify-center items-center w-10 h-10 bg-white border-2 border-b-4 border-black rounded-lg text-xl transition hover:border-t-4 hover:border-b-2"
+                aria-label="Instagram"
+              >
+                <FaInstagram />
+              </a>
+              <a
+                href={config?.tiktok_link || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex justify-center items-center w-10 h-10 bg-white border-2 border-b-4 border-black rounded-lg text-xl transition hover:border-t-4 hover:border-b-2"
+                aria-label="TikTok"
+              >
+                <FaTiktok />
               </a>
             </div>
             <p className="text-sm text-gray-700">
