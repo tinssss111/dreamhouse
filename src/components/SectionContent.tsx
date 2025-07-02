@@ -2,8 +2,35 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
+interface ConfigData {
+  contract_address: string;
+  pump_fun_url: string;
+  x_link: string;
+  instagram_link: string;
+  tiktok_link: string;
+}
+
 export const SectionContent = () => {
   const [isVisible, setIsVisible] = useState(false);
+
+  const [config, setConfig] = useState<ConfigData | null>(null);
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const response = await fetch("/api/config");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: ConfigData = await response.json();
+        setConfig(data);
+      } catch (e: unknown) {
+        console.error("Failed to fetch config: ", e);
+      }
+    };
+
+    fetchConfig();
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,8 +54,6 @@ export const SectionContent = () => {
     };
   }, []);
 
-  const linkBuyToken =
-    "https://pump.fun/coin/GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump?include-nsfw=true";
   const content =
     "Memecoin inspires the community to live a life without luxury and money.";
   const content2 = "Life without trending audio, stay away from the city.";
@@ -80,7 +105,7 @@ export const SectionContent = () => {
                 }`}
               >
                 <a
-                  href={linkBuyToken}
+                  href={config?.pump_fun_url}
                   target="_blank"
                   className="inline-flex items-center justify-center uppercase bg-orange-500 py-3 sm:py-4 px-6 sm:px-8 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[16px] sm:text-[18px] font-semibold transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-lg hover:bg-orange-600 active:scale-95 group"
                 >
@@ -141,7 +166,7 @@ export const SectionContent = () => {
               }`}
             >
               <a
-                href={linkBuyToken}
+                href={config?.pump_fun_url}
                 target="_blank"
                 className="inline-flex items-center justify-center uppercase bg-orange-500 py-4 xl:py-5 px-8 xl:px-10 border-[2px] border-b-[4px] border-[var(--black)] rounded-[8px] text-[18px] xl:text-[20px] font-semibold transition-all duration-300 ease-in-out hover:border-t-[4px] hover:border-b-[2px] hover:scale-105 hover:shadow-xl hover:bg-orange-600 active:scale-95 group"
               >
